@@ -1,11 +1,10 @@
-﻿using Api.Controllers;
-using Api.Models;
+﻿using Api.Models;
 
 namespace Api.Services;
 
 public class PuppyService : IPuppyService
 {
-    private Dictionary<Guid, Puppy> _puppies = new ();
+    private readonly Dictionary<Guid, Puppy> _puppies = new ();
     
     public Puppy? GetPuppyByKey(Guid key)
     {

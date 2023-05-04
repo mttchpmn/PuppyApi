@@ -1,9 +1,10 @@
 ﻿using Api.Models;
+using Api.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
-[Controller]
+[ApiController]
 [Route("[controller]")]
 public class PuppyController : ControllerBase
 {
@@ -51,7 +52,7 @@ public class PuppyController : ControllerBase
             : NotFound();
     }
 
-    [HttpGet]
+    [HttpPost]
     [Route("adopt/{key:Guid}")]
     public IActionResult AdoptPuppy(Guid key)
     {

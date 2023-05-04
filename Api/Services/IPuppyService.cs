@@ -1,6 +1,6 @@
 ﻿using Api.Models;
 
-namespace Api.Controllers;
+namespace Api.Services;
 
 public interface IPuppyService
 {
