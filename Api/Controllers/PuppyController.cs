@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
+[Controller]
+[Route("[controller]")]
 public class PuppyController : ControllerBase
 {
     private readonly IPuppyService _puppyService;
@@ -11,23 +13,23 @@ public class PuppyController : ControllerBase
     {
         _puppyService = puppyService;
     }
-    
+
     [HttpGet]
-    [Route("{id:int}")]
-    public IActionResult GetPuppy(int id)
+    [Route("{key:Guid}")]
+    public IActionResult GetPuppy(Guid key)
     {
-        var puppy = _puppyService.GetPuppyById(id);
+        var puppy = _puppyService.GetPuppyByKey(key);
 
         return puppy != null
             ? Ok(puppy)
             : NotFound();
     }
-    
+
     [HttpGet]
     public IActionResult GetPuppies()
     {
         var puppies = _puppyService.GetPuppies();
-        
+
         return Ok(puppies);
     }
 
@@ -44,24 +46,19 @@ public class PuppyController : ControllerBase
     {
         var updatedPuppy = _puppyService.UpdatePuppy(input);
 
-        return Ok(updatedPuppy);
+        return updatedPuppy != null
+            ? Ok(updatedPuppy)
+            : NotFound();
     }
 
     [HttpGet]
-    [Route("{id:int}")]
-    public IActionResult AdoptPuppy(int id)
+    [Route("{key:Guid}")]
+    public IActionResult AdoptPuppy(Guid key)
     {
-        _puppyService.AdoptPuppy(id);
+        var puppy = _puppyService.AdoptPuppy(key);
 
-        return NoContent();
+        return puppy != null
+            ? Ok(puppy)
+            : NotFound();
     }
-}
-
-public interface IPuppyService
-{
-    Puppy? GetPuppyById(int id);
-    IEnumerable<Puppy> GetPuppies();
-    Puppy AddPuppy(CreatePuppyInput input);
-    Puppy UpdatePuppy(UpdatePuppyInput input);
-    Puppy AdoptPuppy(int id);
 }

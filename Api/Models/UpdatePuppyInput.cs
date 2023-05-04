@@ -1,3 +1,3 @@
 ﻿namespace Api.Models;
 
-public record UpdatePuppyInput(int Id, string Name, int Age, string Breed, string PhotoUrl);
+public record UpdatePuppyInput(Guid Key, string Name, int Age, string Breed, string PhotoUrl);
