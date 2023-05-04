@@ -52,7 +52,7 @@ public class PuppyController : ControllerBase
     }
 
     [HttpGet]
-    [Route("{key:Guid}")]
+    [Route("adopt/{key:Guid}")]
     public IActionResult AdoptPuppy(Guid key)
     {
         var puppy = _puppyService.AdoptPuppy(key);
